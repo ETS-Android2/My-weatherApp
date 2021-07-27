@@ -11,7 +11,8 @@
         android:theme="@style/Theme.MyWeather">
         <activity android:name=".LoginActivity"
             android:theme="@style/NoActionBarTheme"></activity>
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignUpActivity"
+            android:theme="@style/NoActionBarTheme" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/NoActionBarTheme">
