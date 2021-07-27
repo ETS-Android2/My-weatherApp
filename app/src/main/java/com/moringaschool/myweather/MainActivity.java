@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(v==mLoginButton){
             //navigate to login activity
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }
