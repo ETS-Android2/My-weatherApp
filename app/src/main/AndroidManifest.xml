@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWeather">
-        <activity android:name=".WeatherActivity"></activity>
+        <activity android:name=".WeatherActivity"
+            android:theme="@style/NoActionBarTheme" ></activity>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/NoActionBarTheme" />
