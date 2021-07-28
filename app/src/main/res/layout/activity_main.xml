@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/imageView"
-        android:src="@drawable/craig_whitehead_sujp8zpkubi_unsplash"
+        android:src="@drawable/cloud"
         android:scaleType="centerCrop" />
 
 
@@ -20,7 +20,7 @@
         android:layout_height="214dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/autour_one"
-        android:text="MY WEATHER APP"
+        android:text="MY WEATHER"
         android:textColor="@color/black"
         android:textSize="50sp"
         android:textStyle="bold" />
