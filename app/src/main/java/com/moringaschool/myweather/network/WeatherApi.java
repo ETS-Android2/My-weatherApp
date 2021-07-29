@@ -7,7 +7,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface WeatherApi {
-    @GET("/data/2.5/weather")
+    @GET("weather?appid=439d4b804bc8187953eb36d2a8c26a02")
+
     Call<WeatherSearchResponse> getWeather(
             @Query("q") String location
     );

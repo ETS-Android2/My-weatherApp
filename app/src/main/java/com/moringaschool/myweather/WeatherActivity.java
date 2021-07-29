@@ -40,7 +40,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         ButterKnife.bind(this);
         mSearchCityButton.setOnClickListener(this);
         String location = mCityNameEditText.getText().toString();
-        fetchWeather(location);
 
       
     }
@@ -49,32 +48,29 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v == mSearchCityButton){
 
-
-
+        getWeather(mCityNameEditText.getText().toString().trim());
         }
 
     }
 
 
 
-    private void fetchWeather (String location){
+    private void getWeather (String location){
 
         //creating a client object and using it to make a request to the Weather API.
-        WeatherApi client = WeatherClient.getClient();
+        WeatherApi client = WeatherClient.getClient().create(WeatherApi.class);
         Call<WeatherSearchResponse> call = client.getWeather(location);
 
         call.enqueue(new Callback<WeatherSearchResponse>() {
             @Override
             public void onResponse(Call<WeatherSearchResponse> call, Response<WeatherSearchResponse> response) {
 
-                Log.d("location",location);
-                if (response.isSuccessful()) {
-
-                    mResults.setText(response.body().getName());
-
-
-
-                }
+                Log.d("DATA", String.valueOf(response.body().getMain().getTemp()));
+//                if (response.isSuccessful()) {
+//
+//                    mResults.setText(response.body().getName());
+//
+//                }
             }
 
             @Override
@@ -86,13 +82,13 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    public void getweather(View view) {
-        String tempUrl = "";
-        String city = mCityNameEditText.getText().toString().trim();
-        if(city.equals("")){
-            mResults.setText("City cannot be empty");
-        }else {
-            tempUrl= WEATHER_BASE_URL + city +"&appid" + WEATHER_API_KEY;
-        }
-    }
+//    public void getweather(View view) {
+//        String tempUrl = "";
+//        String city = mCityNameEditText.getText().toString().trim();
+//        if(city.equals("")){
+//            mResults.setText("City cannot be empty");
+//        }else {
+//            tempUrl= WEATHER_BASE_URL + city +"&appid" + WEATHER_API_KEY;
+//        }
+//    }
 }

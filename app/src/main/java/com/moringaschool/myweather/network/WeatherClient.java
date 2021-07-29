@@ -18,30 +18,17 @@ public class WeatherClient {
 
     private static Retrofit retrofit = null;
 
-    public static WeatherApi getClient() {
+     public static Retrofit getClient() {
         if (retrofit == null) {
-            //OkHttpClient intercepts each request and adds an HTTP Authorization header with the value of the Yelp API token.
-            OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .addInterceptor(new Interceptor() {
-                        @Override
-                        public Response intercept(Chain chain) throws IOException {
-                            Request newRequest = chain.request().newBuilder()
-                                    .addHeader("Authorization", WEATHER_API_KEY)
-                                    .build();
-                            return chain.proceed(newRequest);
-                        }
-                    })
-                    .build();
+
             retrofit = new Retrofit.Builder()
-                    .baseUrl(WEATHER_BASE_URL)
-                    .client(okHttpClient)
+                    .baseUrl("https://openweathermap.org/data/2.5/")
                     //converter handles data serialization from JSON to Java objects
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            Log.e("TAG",retrofit.create(WeatherApi.class).toString());
 
         }
 
-        return retrofit.create(WeatherApi.class);
+        return retrofit;
     }
 }
