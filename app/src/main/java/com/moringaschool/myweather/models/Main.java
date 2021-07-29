@@ -10,10 +10,10 @@ public class Main {
 
     @SerializedName("temp")
     @Expose
-    private Double temp;
+    private String temp;
     @SerializedName("feels_like")
     @Expose
-    private Double feelsLike;
+    private String feelsLike;
     @SerializedName("temp_min")
     @Expose
     private Double tempMin;
@@ -51,7 +51,7 @@ public class Main {
      * @param grndLevel
      * @param tempMin
      */
-    public Main(Double temp, Double feelsLike, Double tempMin, Double tempMax, Integer pressure, Integer humidity, Integer seaLevel, Integer grndLevel) {
+    public Main(String temp, String feelsLike, Double tempMin, Double tempMax, Integer pressure, Integer humidity, Integer seaLevel, Integer grndLevel) {
         super();
         this.temp = temp;
         this.feelsLike = feelsLike;
@@ -63,19 +63,19 @@ public class Main {
         this.grndLevel = grndLevel;
     }
 
-    public Double getTemp() {
+    public CharSequence getTemp() {
         return temp;
     }
 
-    public void setTemp(Double temp) {
+    public void setTemp(String temp) {
         this.temp = temp;
     }
 
-    public Double getFeelsLike() {
+    public CharSequence getFeelsLike() {
         return feelsLike;
     }
 
-    public void setFeelsLike(Double feelsLike) {
+    public void setFeelsLike(String feelsLike) {
         this.feelsLike = feelsLike;
     }
 

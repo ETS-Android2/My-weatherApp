@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.moringaschool.myweather.models.Main;
@@ -31,6 +32,11 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.searchCityButton) Button mSearchCityButton;
     @BindView(R.id.cityNameEditText) EditText mCityNameEditText;
     @BindView(R.id.results) TextView mResults;
+    @BindView(R.id.decResult) TextView mDecResults;
+    @BindView(R.id.countryResults) TextView mCountryResults;
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+
 
 
     @Override
@@ -40,6 +46,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         ButterKnife.bind(this);
         mSearchCityButton.setOnClickListener(this);
         String location = mCityNameEditText.getText().toString();
+        hideProgressBar();
 
       
     }
@@ -56,39 +63,50 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private void getWeather (String location){
-
+        showProgressbar();
         //creating a client object and using it to make a request to the Weather API.
         WeatherApi client = WeatherClient.getClient().create(WeatherApi.class);
         Call<WeatherSearchResponse> call = client.getWeather(location);
 
         call.enqueue(new Callback<WeatherSearchResponse>() {
+
             @Override
             public void onResponse(Call<WeatherSearchResponse> call, Response<WeatherSearchResponse> response) {
 
-                Log.d("DATA", String.valueOf(response.body().getMain().getTemp()));
-//                if (response.isSuccessful()) {
-//
-//                    mResults.setText(response.body().getName());
-//
-//                }
+
+              if(response.isSuccessful()) {
+                  hideProgressBar();
+                  mResults.setText("Temp:" + response.body().getMain().getTemp());
+                  mDecResults.setText("Feels_like:" + response.body().getMain().getFeelsLike());
+//                mHumidResults.setText(response.body().getMain().getHumidity());
+                  mCountryResults.setText("Country:" + response.body().getSys().getCountry());
+
+              }else {
+                  showUnSuccsesfulMessage();
+              }
             }
 
             @Override
             public void onFailure(Call<WeatherSearchResponse> call, Throwable t) {
-
+                hideProgressBar();
             }
         });
 
     }
 
+    private void showUnSuccsesfulMessage() {
+        mErrorTextView.setText("something went wrong .please try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
 
-//    public void getweather(View view) {
-//        String tempUrl = "";
-//        String city = mCityNameEditText.getText().toString().trim();
-//        if(city.equals("")){
-//            mResults.setText("City cannot be empty");
-//        }else {
-//            tempUrl= WEATHER_BASE_URL + city +"&appid" + WEATHER_API_KEY;
-//        }
-//    }
+    private void hideProgressBar(){
+
+        mProgressBar.setVisibility(View.GONE);
+    }
+    private void showProgressbar(){
+
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+
 }
