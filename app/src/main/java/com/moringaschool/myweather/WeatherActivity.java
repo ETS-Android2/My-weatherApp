@@ -3,6 +3,7 @@ package com.moringaschool.myweather;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,6 +24,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.moringaschool.myweather.Constants.WEATHER_API_KEY;
+import static com.moringaschool.myweather.Constants.WEATHER_BASE_URL;
+
 public class WeatherActivity extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.searchCityButton) Button mSearchCityButton;
     @BindView(R.id.cityNameEditText) EditText mCityNameEditText;
@@ -35,23 +39,41 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
         mSearchCityButton.setOnClickListener(this);
+        String location = mCityNameEditText.getText().toString();
+        fetchWeather(location);
+
+      
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == mSearchCityButton){
+
+
+
+        }
+
+    }
+
+
+
+    private void fetchWeather (String location){
 
         //creating a client object and using it to make a request to the Weather API.
         WeatherApi client = WeatherClient.getClient();
-        Call<WeatherSearchResponse> call = client.getWeather();
+        Call<WeatherSearchResponse> call = client.getWeather(location);
 
-        call.enqueue(new Callback<WeatherSearchResponse>(){
+        call.enqueue(new Callback<WeatherSearchResponse>() {
             @Override
             public void onResponse(Call<WeatherSearchResponse> call, Response<WeatherSearchResponse> response) {
 
-                if(response.isSuccessful()){
-                    List<Weather> WeatherList = response.body().getWeather();
-                    String[] Weather = new String[WeatherList.size()];
-                    for(int i=0; i < Weather.length;i++){
-                        Weather[i] = WeatherList.get(i).getDescription();
-                    }
-                    ArrayAdapter adapter = new ArrayAdapter(WeatherActivity.this, android.R.layout.simple_list_item_1,Weather);
-                    mResults.setText((CharSequence) adapter);
+                Log.d("location",location);
+                if (response.isSuccessful()) {
+
+                    mResults.setText(response.body().getName());
+
+
+
                 }
             }
 
@@ -63,11 +85,14 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
-
-    public void getWeatherDetails(View view) {
+    public void getweather(View view) {
+        String tempUrl = "";
+        String city = mCityNameEditText.getText().toString().trim();
+        if(city.equals("")){
+            mResults.setText("City cannot be empty");
+        }else {
+            tempUrl= WEATHER_BASE_URL + city +"&appid" + WEATHER_API_KEY;
+        }
     }
 }

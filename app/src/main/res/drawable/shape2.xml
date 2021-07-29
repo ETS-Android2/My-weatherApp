@@ -7,7 +7,7 @@
             android:centerColor="#FFC107"
             android:centerX="35%"
             android:endColor="#03A9F4"
-            android:startColor="#FFEB3B"
+            android:startColor="#FF933B"
             android:type="linear" />
         <padding
             android:bottom="0dp"

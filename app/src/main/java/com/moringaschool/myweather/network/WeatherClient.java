@@ -1,5 +1,7 @@
 package com.moringaschool.myweather.network;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -36,6 +38,8 @@ public class WeatherClient {
                     //converter handles data serialization from JSON to Java objects
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
+            Log.e("TAG",retrofit.create(WeatherApi.class).toString());
+
         }
 
         return retrofit.create(WeatherApi.class);
