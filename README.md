@@ -1,7 +1,7 @@
 # APP NAME
 My Weather
 
-##Description
+## Description
 
 An application that tells you weather Updated of a region .It uses the open weather API
 
