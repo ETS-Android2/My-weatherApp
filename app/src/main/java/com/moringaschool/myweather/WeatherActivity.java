@@ -2,8 +2,12 @@ package com.moringaschool.myweather;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.moringaschool.myweather.models.Main;
 import com.moringaschool.myweather.models.Weather;
 import com.moringaschool.myweather.models.WeatherSearchResponse;
@@ -108,5 +113,30 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
+//for the logout
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.menu_main, menu);
+    return super.onCreateOptionsMenu(menu);
+}
 
+    //for the logout
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    //for the logout
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(WeatherActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 }

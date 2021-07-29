@@ -24,27 +24,28 @@
         android:id="@+id/cityNameEditText"
         android:layout_width="257dp"
         android:layout_height="46dp"
-        android:hint="CityName.."
         android:background="@drawable/shape"
+        android:hint="CityName.."
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.147" />
 
     <Button
         android:id="@+id/searchCityButton"
         android:layout_width="159dp"
         android:layout_height="53dp"
+     android:background="@color/white"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/shape2"
+        android:layout_marginTop="48dp"
         android:padding="10dp"
         android:text="Search"
-        android:textColor="@android:color/white"
+        android:textColorHint="@color/black"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintHorizontal_bias="0.662"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityNameEditText" />
 

@@ -12,8 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWeather"
         android:usesCleartextTraffic="true" >
-        <activity android:name=".WeatherActivity"
-            android:theme="@style/NoActionBarTheme" ></activity>
+        <activity android:name=".WeatherActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/NoActionBarTheme" />
